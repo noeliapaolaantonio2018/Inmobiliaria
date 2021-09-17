@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Contratos>
+
+@{ ViewData["Title"] = "Lista de Contratos"; }
+
+<h2>Todos los Contratos</h2>
+
+<h4> @Html.ActionLink("Buscar Contratos Vigentes", "Busqueda", "Contratos")</h4>
+
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">Nº Contrato</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Inquilinos)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Inmuebles)
+            </th>
+            <th bgcolor="#4CAF50">Fecha Inicio</th>
+            <th bgcolor="#4CAF50">Fecha Cierre</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Vigente)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdContr)
+    </td>
+    <td>
+        @(item.Inquilinos.Nombre + " " + item.Inquilinos.Apellido)
+    </td>
+    <td>
+        @(item.Inmuebles.Tipo + " " + item.Inmuebles.Direccion)
+    </td>
+    <td>
+        @*Html.DisplayFor(modelItem => item.FechaInicio)*@
+        @item.FechaInicio.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @*Html.DisplayFor(modelItem => item.FechaCierre)*@
+        @item.FechaCierre.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Monto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vigente)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdContr }) |
+
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })
+    </td>
+</tr>}
+    </tbody>
+</table>

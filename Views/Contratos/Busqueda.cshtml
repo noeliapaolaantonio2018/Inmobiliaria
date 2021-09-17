@@ -1,0 +1,27 @@
+﻿@model Inmobiliaria.Models.PorFechaView
+
+@{ ViewData["Title"] = "Busqueda"; }
+
+<h2>Busqueda por Fecha</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Busqueda">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FechaBusqueda" class="control-label">Fecha de Busqueda</label>
+                <input asp-for="FechaBusqueda" type="date" class="form-control" />
+                <span asp-validation-for="FechaBusqueda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-success" />  |
+                <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

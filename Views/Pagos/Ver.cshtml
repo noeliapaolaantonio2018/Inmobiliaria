@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Pagos>
+
+@{ ViewData["Title"] = "Ver"; }
+
+<h2>Ver Pagos</h2>
+
+<p>
+    <h6 class="alert alert-success">
+        Pagos correspondientes al Contrato Nº: @ViewBag.Contratos.IdContr Inquilino: @ViewBag.Contratos.Inquilinos.Nombre  @ViewBag.Contratos.Inquilinos.Apellido
+        del Inmueble de tipo: @ViewBag.Contratos.Inmuebles.Tipo con Direccion: @ViewBag.Contratos.Inmuebles.Direccion
+    </h6>
+</p>
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">
+                <label>Numero De Pago</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Nº Contrato</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Fecha De Pago</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Importe</label>
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdContr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaPago)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Importe)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdPago }) |
+
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPago }) |
+    </td>
+
+</tr>
+}       @Html.ActionLink("Realizar Pago", "Create", "Pagos", new { id = @ViewBag.Contratos.IdInm })
+</tbody>
+</table>
+<div>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
+</div>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Contratos>
+
+@{ ViewData["Title"] = "Filtrados"; }
+
+<h2>Filtrados</h2>
+
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">Nº Contrato</th>
+            <th bgcolor="#4CAF50">Inquilino</th>
+            <th bgcolor="#4CAF50">Direccion Inmueble</th>
+            <th bgcolor="#4CAF50">Tipo</th>
+            <th bgcolor="#4CAF50">Fecha Inicio</th>
+            <th bgcolor="#4CAF50">Fecha Cierre</th>
+            <th bgcolor="#4CAF50">Importe</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Vigente)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in (IList<Contratos>)ViewBag.Filtrados)
+        {
+<tr>
+    <td>
+        @item.IdContr
+    </td>
+    <td>
+        @(item.Inquilinos.Nombre + " " + item.Inquilinos.Apellido)
+
+    </td>
+    <td>
+        @item.Inmuebles.Direccion
+    </td>
+    <td>
+        @item.Inmuebles.Tipo
+    </td>
+    <td>
+        @item.FechaInicio
+    </td>
+    <td>
+        @item.FechaCierre
+    </td>
+    <td>
+        @item.Monto
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vigente)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdContr }) |
+
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
+</div>

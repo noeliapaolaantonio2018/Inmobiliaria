@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Inmuebles>
+
+@{ ViewData["Title"] = "Inmuebles"; }
+
+
+
+@if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
+{
+<p>
+    <h2>Inmuebles Disponibles</h2>
+
+    <a class="btn btn-primary" asp-action="Create">Agregar Inmueble</a>
+</p>}
+
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+
+    <thead>
+        <tr>
+            @if (User.IsInRole("Permitidos"))
+            {
+<th bgcolor="#4CAF50">
+    @Html.DisplayNameFor(model => model.IdInm)
+</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Propietarios)
+            </th>
+}           <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Uso)
+            </th>
+            <th bgcolor="#4CAF50">Cantidad Ambientes</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+
+    @if (User.IsInRole("Permitidos"))
+    {
+<td>
+    @Html.DisplayFor(modelItem => item.IdInm)
+</td>
+                    <td>
+                        @(item.Propietarios.Nombre + " " + item.Propietarios.Apellido)
+                    </td>
+}
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Direccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tipo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Uso)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CantAmbientes)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Costo)
+    </td>
+    <td>
+        @if (User.IsInRole("Permitidos"))
+        {
+
+@Html.ActionLink("Editar", "Edit", new { id = item.IdInm })
+                    @Html.ActionLink("Nuevo Contrato", "../Contratos/Create", new { id = item.IdInm })}
+        @if (User.IsInRole("Administrador"))
+        {
+@Html.ActionLink("Eliminar", "Delete", new { id = item.IdInm })}
+
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+<div>
+    <a class="btn btn-info" asp-action="Index">Regresar</a>
+</div>

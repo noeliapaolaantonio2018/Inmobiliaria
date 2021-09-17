@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Contratos>
+
+@{ ViewData["Title"] = "Ver"; }
+
+<h2>Ver Contratos</h2>
+
+<p>
+    <a asp-action="Create" asp-route-id="@ViewBag.Id">Agregar Nuevo Contrato</a>
+</p>
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">Inquilino</th>
+            <th bgcolor="#4CAF50">Ubicacion Inmueble</th>
+            <th bgcolor="#4CAF50">Fecha Inicio</th>
+            <th bgcolor="#4CAF50">Fecha Cierre</th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Vigente)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inquilinos.Nombre) @Html.DisplayFor(modelItem => item.Inquilinos.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inmuebles.Direccion)
+                </td>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.FechaInicio)*@
+                    @item.FechaCierre.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @*Html.DisplayFor(modelItem => item.FechaCierre)*@
+                    @item.FechaCierre.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Monto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vigente)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdContr }) |
+                    @Html.ActionLink("Ver Pagos", "Ver", "Pagos", new { id = item.IdContr }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdContr })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

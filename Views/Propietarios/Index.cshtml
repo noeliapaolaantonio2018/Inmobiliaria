@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Propietarios>
+
+@{
+    ViewData["Title"] = "Indice";
+}
+
+<h2>Lista de Propietarios</h2>
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Agregar Nuevo Propietario</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50" <label>Nº Propietario</label>
+           </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Dni)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdProp }) |
+                
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProp })  |
+                @Html.ActionLink("Ver Propiedades", "InmPorProp", "Inmuebles", new { id = item.IdProp })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

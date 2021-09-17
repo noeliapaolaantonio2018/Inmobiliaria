@@ -1,0 +1,44 @@
+﻿@model Inmobiliaria.Models.Pagos
+
+@{
+    ViewData["Title"] = "Actualizar Pagos";
+}
+
+<h2>Pagos</h2>
+
+<h4>Actualizar Pago</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NumPago" class="control-label">Nº Pago</label>
+                    <input asp-for="NumPago" class="form-control" />
+                    <span asp-validation-for="NumPago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdContr" class="control-label">Nº Contrato</label>
+                    <input asp-for="IdContr" class="form-control" />
+                    <span asp-validation-for="IdContr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaPago" class="control-label">Fecha Pago</label>
+                    <input asp-for="FechaPago" class="form-control" />
+                    <span asp-validation-for="FechaPago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Importe" class="control-label"></label>
+                    <input asp-for="Importe" class="form-control" />
+                    <span asp-validation-for="Importe" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar Cambios" class="btn btn-success" />   |
+                    <a class="btn btn-info" asp-action="Index">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+

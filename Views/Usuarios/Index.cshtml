@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Usuarios>
+
+@{ ViewData["Title"] = "Inicio"; }
+
+<h2>Listado de Usuarios</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Agregar Usuario</a>
+</p>
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">
+                <label>Nombre</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Apellido</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Email</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Clave</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Rol</label>
+            </th>
+            <th bgcolor="#4CAF50">
+                <label>Avatar</label>
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Clave)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rol)
+    </td>
+    <td>
+        <img width="32" src="@item.Avatar" />
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdUs }) |
+        @if (User.IsInRole("Administrador"))
+        {
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdUs })}
+    </td>
+    </tr>
+        }
+    </tbody>
+</table>

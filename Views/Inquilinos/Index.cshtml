@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Inquilinos>
+
+@{ ViewData["Title"] = "Indice"; }
+
+<h2>Listado de Inquilinos</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Agregar Inquilino</a>
+</p>
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Dni)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th bgcolor="#4CAF50" <label>Direccion Trabajo</label>
+            </th>
+            <th bgcolor="#4CAF50" <label>Nombre Garante</label>
+            </th>
+            <th bgcolor="#4CAF50" <label>DNI Garante</label>
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DireccionTrabajo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre_Garante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dni_Garante)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { Id = item.IdInq }) |
+
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdInq })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

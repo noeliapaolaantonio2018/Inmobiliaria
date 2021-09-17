@@ -1,0 +1,9 @@
+﻿
+@{ ViewData["Title"] = "AlgoRestringido"; }
+
+<h4>
+    <b>
+        @foreach (var u in User.Claims)
+        {
+@u.Value<br />}
+    </b>

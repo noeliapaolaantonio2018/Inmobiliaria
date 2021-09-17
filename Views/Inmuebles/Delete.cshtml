@@ -1,0 +1,68 @@
+﻿@model Inmobiliaria.Models.Inmuebles
+
+@{ ViewData["Title"] = "Eliminar Registro"; }
+
+<p>
+    <h2>Eliminar Inmueble</h2>
+
+    <h6 class="alert alert-warning"> Usted esta seguro que desea Eliminar el Inmueble ???</h6>
+</p>
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label>Codigo Inmueble</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdInm)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Codigo Propietario</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdProp)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Uso)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Uso)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Cantidad Ambientes</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CantAmbientes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Costo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Costo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Disponible)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Disponible)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Borrar Inmueble" class="btn btn-danger" />  |
+        <a class="btn btn-info" asp-action="Index">Regresar</a>
+    </form>
+</div>

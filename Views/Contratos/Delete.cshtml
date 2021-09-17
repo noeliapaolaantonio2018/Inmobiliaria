@@ -1,0 +1,63 @@
+﻿@model Inmobiliaria.Models.Contratos
+
+@{ ViewData["Title"] = "Eliminar Contrato"; }
+
+<p>
+
+    <h2>Eliminar Contrato</h2>
+
+    <h6 class="alert alert-warning"> Usted esta seguro que desea Eliminar el Contrato ???</h6>
+</p>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label>Codigo Contrato</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdContr)
+        </dd>
+        <dt>
+            <label>Codigo Inquilino</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdInq)
+        </dd>
+        <dt>
+            <label>Codigo Inmueble</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdInm)
+        </dd>
+        <dt>
+            <label>Fecha Inicio</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaInicio)
+        </dd>
+        <dt>
+            <label>Fecha Cierre</label>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaCierre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Borrar" class="btn btn-danger" />  |
+        <a class="btn btn-info" asp-action="Index">Regresar</a>
+    </form>
+</div>

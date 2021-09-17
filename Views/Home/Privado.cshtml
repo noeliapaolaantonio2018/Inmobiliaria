@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Inmobiliaria.Models.Inmuebles>
+@{ ViewData["Title"] = "Privado"; }
+
+<h2>Mis Propiedades</h2>
+
+<h4>
+    <b>
+        @foreach (var u in User.Claims)
+        {
+@u.Value<br />}
+    </b>
+</h4>
+
+<table height="100" width="100" background="../imagenes/inmo.png" class="table">
+    <thead>
+        <tr>
+
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Uso)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.CantAmbientes)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th bgcolor="#4CAF50">
+                @Html.DisplayNameFor(model => model.Disponible)
+            </th>
+            <th bgcolor="#4CAF50"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Direccion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tipo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Uso)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CantAmbientes)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Costo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Disponible)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "EditDeUs", "Inmuebles", new { id = item.IdInm })
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+
+
+<a class="btn btn-primary" ;class="nav-link" href="../Usuarios/Logout"> Cerrar Sesion</a>
