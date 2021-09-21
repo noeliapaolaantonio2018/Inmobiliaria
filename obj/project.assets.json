@@ -8745,19 +8745,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\Noelia\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
+      "projectUniqueName": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
       "projectName": "Inmobiliaria",
-      "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\Inmobiliaria.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\Inmobiliaria.net\\obj\\",
+      "projectPath": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+      "packagesPath": "C:\\Users\\Noelia\\.nuget\\packages\\",
+      "outputPath": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Noelia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8769,6 +8773,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -8780,6 +8785,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -8820,7 +8826,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -132,7 +132,7 @@ namespace Inmobiliaria.Api
 		[HttpGet("dependientes")]
 		public async Task<IActionResult> Dependientes()
 		{
-			Persona p10 = new Persona
+			Personas p10 = new Personas
 			{
 				Id = 10,
 				Pasatiempos = new List<PersonaPasatiempo>

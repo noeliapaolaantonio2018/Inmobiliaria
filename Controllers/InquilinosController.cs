@@ -19,7 +19,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Inquilinos
-        [Authorize(Policy = "Permitidos")]
+        // [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioInquilinos.ObtenerTodos();
@@ -34,7 +34,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Inquilinos/Create
-        [Authorize(Policy = "Permitidos")]
+        // [Authorize(Policy = "Permitidos")]
         public ActionResult Create()
         {
             return View();
@@ -43,7 +43,7 @@ namespace Inmobiliaria.Controllers
         // POST: Inquilinos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Permitidos")]
+        // [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Inquilinos i)
         {
             try
@@ -67,7 +67,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Inquilinos/Edit/5
-        [Authorize(Policy = "Permitidos")]
+        // [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var i = repositorioInquilinos.ObtenerPorId(id);
@@ -82,7 +82,7 @@ namespace Inmobiliaria.Controllers
         // POST: Inquilinos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Permitidos")]
+         //[Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             Inquilinos i = null;
@@ -110,7 +110,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Inquilinos/Delete/5
-        [Authorize(Policy = "Administrador")]
+         //[Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var i = repositorioInquilinos.ObtenerPorId(id);
@@ -124,7 +124,7 @@ namespace Inmobiliaria.Controllers
         // POST: Inquilinos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "Administrador")]
+         //[Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Inquilinos entidad)
         {
             try
