@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TOP7EF0CfjrdtR9BfygLEF2lBTzwiRHIpK4kdKG7z54qTgUTqmXrlQS1vmgqbsXvSFKpE8yGeQmDepbXtpVbnw==",
+  "dgSpecHash": "a3vPehP1WpTgq8mJ4iAXhjZe4nONmEFortu2paU2+veHBRivdmUkCz4xT8dWu0/WxAsN3yqFWfbjR/w9+32o1A==",
   "success": true,
-  "projectFilePath": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+  "projectFilePath": "C:\\Users\\Noelia\\Documents\\InmobiliariaAntonio\\Inmobiliaria\\Inmobiliaria.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Noelia\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.15\\microsoft.aspnetcore.authentication.jwtbearer.3.1.15.nupkg.sha512",
     "C:\\Users\\Noelia\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

@@ -8751,11 +8751,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+      "projectUniqueName": "C:\\Users\\Noelia\\Documents\\InmobiliariaAntonio\\Inmobiliaria\\Inmobiliaria.csproj",
       "projectName": "Inmobiliaria",
-      "projectPath": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\Inmobiliaria.csproj",
+      "projectPath": "C:\\Users\\Noelia\\Documents\\InmobiliariaAntonio\\Inmobiliaria\\Inmobiliaria.csproj",
       "packagesPath": "C:\\Users\\Noelia\\.nuget\\packages\\",
-      "outputPath": "D:\\Noe\\Escritorio\\carrera virtual\\tudsviertual2año\\segundo año tds\\NET\\Inmobiliaria\\Inmobiliaria.net-master\\obj\\",
+      "outputPath": "C:\\Users\\Noelia\\Documents\\InmobiliariaAntonio\\Inmobiliaria\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

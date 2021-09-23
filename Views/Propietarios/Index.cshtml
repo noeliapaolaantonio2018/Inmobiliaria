@@ -33,33 +33,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.IdProp }) |
-                
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProp })  |
-                @Html.ActionLink("Ver Propiedades", "InmPorProp", "Inmuebles", new { id = item.IdProp })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdProp }) |
+
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdProp })  |
+                    @Html.ActionLink("Ver Propiedades", "InmPorProp", "Inmuebles", new { id = item.IdProp })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
