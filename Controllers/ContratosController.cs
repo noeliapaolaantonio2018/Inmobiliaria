@@ -6,7 +6,7 @@ using System;
 
 namespace Inmobiliaria.Controllers
 {
-     //[Authorize]
+     [Authorize]
     public class ContratosController : Controller
     {
         private readonly IConfiguration configuration;
@@ -22,7 +22,7 @@ namespace Inmobiliaria.Controllers
             repositorioContratos = new RepositorioContratos(configuration);
         }
         // GET: Contratos
-         //[Authorize(Policy = "Permitidos")]
+         [Authorize(Policy = "Permitidos")]
         public ActionResult Index()
         {
             var lista = repositorioContratos.ObtenerTodos();
@@ -40,7 +40,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Contratos/Create
-         //[Authorize(Policy = "Permitidos")]
+         [Authorize(Policy = "Permitidos")]
         public ActionResult Create(int id)
         {
             ViewBag.Inmuebles = repositorioInmuebles.ObtenerPorId(id);
@@ -51,7 +51,7 @@ namespace Inmobiliaria.Controllers
         // POST: Contratos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-         //[Authorize(Policy = "Permitidos")]
+         [Authorize(Policy = "Permitidos")]
         public ActionResult Create(Contratos c)
         {
             try
@@ -86,7 +86,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Contratos/Edit/5
-         //[Authorize(Policy = "Permitidos")]
+         [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id)
         {
             var i = repositorioContratos.ObtenerPorId(id);
@@ -101,7 +101,7 @@ namespace Inmobiliaria.Controllers
         // POST: Contratos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-         //[Authorize(Policy = "Permitidos")]
+         [Authorize(Policy = "Permitidos")]
         public ActionResult Edit(int id, Contratos c)
         {
             try
@@ -120,7 +120,7 @@ namespace Inmobiliaria.Controllers
         }
 
         // GET: Contratos/Delete/5
-         //[Authorize(Policy = "Administrador")]
+         [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var c = repositorioContratos.ObtenerPorId(id);
@@ -134,7 +134,7 @@ namespace Inmobiliaria.Controllers
         // POST: Contratos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [Authorize(Policy = "Administrador")]
+         [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Contratos c)
         {
             try

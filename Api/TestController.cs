@@ -86,7 +86,7 @@ namespace Inmobiliaria.Api
 		}
 
 		// POST api/<controller>/usuario/5
-		[HttpPost("usuario/{id}")]
+		[HttpPost("usuarios/{id}")]
 		public Usuarios Post([FromForm] Usuarios usuarios, int id)
 		{
 			usuarios.IdUs = id;

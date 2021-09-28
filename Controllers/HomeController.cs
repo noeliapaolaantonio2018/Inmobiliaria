@@ -44,13 +44,13 @@ namespace Inmobiliaria.Controllers
             return View(lista);
         }
 
-         //[Authorize(Policy = "Administrador")]
+         [Authorize(Policy = "Administrador")]
         public IActionResult SuperRestringido()
         {
             return View();
         }
 
-        // [Authorize(Policy = "Propietario")]
+         [Authorize(Policy = "Propietario")]
         public IActionResult Privado()
         {
             Propietarios p = repositorioPropietarios.ObtenerPorEmail(User.Identity.Name);
@@ -59,7 +59,7 @@ namespace Inmobiliaria.Controllers
 
         }
 
-         //[Authorize(Policy = "Empleado")]
+         [Authorize(Policy = "Empleado")]
         public IActionResult AlgoRestringido()
         {
             return View();
