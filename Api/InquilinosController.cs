@@ -28,18 +28,24 @@ namespace Inmobiliaria.Api
 
         // GET: api/<InquilinosController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<ActionResult<IEnumerable<Inquilinos>>> Get()
         {
             try
             {
-                var usuarios = User.Identity.Name;
-                //var res = contexto.Inquilino.Select(x => new { x.Nombre, x.Apellido, x.Email }).SingleOrDefault(x => x.Email == inquilino);
-                var res = contexto.Contratos.Include(x => x.Inquilinos)
-                         .Include(e => e.Inmuebles.Propietarios)
-                         .Where(e => e.Inmuebles.Propietarios.Email == usuarios)
-                         .Select(x => x.Inquilinos).Distinct()
-                         .ToList();
-                return Ok(res);
+                var inquilinos = await contexto.Contratos
+                    .Include(contratos => contratos.Inmuebles)
+                    .ThenInclude(inmuebles => inmuebles.Propietarios)
+                    .Include(contratos => contratos.Inquilinos)
+                    .Where(contratos => contratos.Inmuebles.Propietarios.Email == User.Identity.Name && contratos.FechaCierre <= DateTime.Now && contratos.FechaCierre >= DateTime.Now)
+                    .Select(contratos => new { contratos.Inmuebles, contratos.Inquilinos })
+                    .ToListAsync();
+
+                if (inquilinos == null)
+                {
+                    return NotFound("No existen inquilinos");
+                }
+
+                return Ok(inquilinos);
             }
             catch (Exception ex)
             {
@@ -47,13 +53,12 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // GET api/<InquilinosController>/5
+        // GET api/<InquilinoController>/1
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             if (id <= 0)
                 return NotFound();
-
             var res = contexto.Inquilinos.FirstOrDefault(x => x.IdInq == id);
 
             if (res != null)
@@ -65,7 +70,7 @@ namespace Inmobiliaria.Api
         }
 
 
-        // POST api/<InquilinosController>
+        // POST api/<InquilinoController>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] Inquilinos inquilinos)
         {
@@ -87,7 +92,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // PUT api/<InquilinosController>/5
+        // PUT api/<InquilinoController>/1
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] Inquilinos inquilinos)
         {
@@ -102,7 +107,7 @@ namespace Inmobiliaria.Api
 
                 return BadRequest();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException)
             {
                 if (!InquilinoExists(id))
                 {
@@ -119,7 +124,7 @@ namespace Inmobiliaria.Api
             return contexto.Inquilinos.Any(e => e.IdInq == id);
         }
 
-        // DELETE api/<InquilinosController>/5
+        // DELETE api/<InquilinoController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -130,7 +135,6 @@ namespace Inmobiliaria.Api
                     var p = contexto.Inquilinos.Find(id);
                     if (p == null)
                         return NotFound();
-
                     contexto.Inquilinos.Remove(p);
                     contexto.SaveChanges();
                     return Ok(p);

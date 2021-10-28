@@ -21,8 +21,8 @@ namespace Inmobiliaria.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email) " +
-                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email);" +
+                string sql = $"INSERT INTO Propietarios (Nombre, Apellido, Dni, Telefono, Email, Clave) " +
+                    $"VALUES (@nombre, @apellido, @dni, @telefono, @email, @clave);" +
                     $"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -32,6 +32,7 @@ namespace Inmobiliaria.Models
                     command.Parameters.AddWithValue("@dni", p.Dni);
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
+                    command.Parameters.AddWithValue("@clave", p.Clave);
                     connection.Open();
                     res = Convert.ToInt32(command.ExecuteScalar());
                     p.IdProp = res;
@@ -72,6 +73,7 @@ namespace Inmobiliaria.Models
                     command.Parameters.AddWithValue("@dni", p.Dni);
                     command.Parameters.AddWithValue("@telefono", p.Telefono);
                     command.Parameters.AddWithValue("@email", p.Email);
+                    command.Parameters.AddWithValue("@clave", p.Clave);
                     command.Parameters.AddWithValue("@id", p.IdProp);
                     connection.Open();
                     res = command.ExecuteNonQuery();
@@ -102,6 +104,7 @@ namespace Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
+                            Clave = reader.GetString(6),
                         };
                         res.Add(p);
                     }
@@ -115,7 +118,7 @@ namespace Inmobiliaria.Models
             Propietarios p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
+                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
                     $" WHERE IdProp=@id";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -133,6 +136,7 @@ namespace Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
+                            Clave = reader.GetString(6),
 
                         };
                     }
@@ -146,7 +150,7 @@ namespace Inmobiliaria.Models
             Propietarios p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
+                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
                     $" WHERE Email=@email";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -164,7 +168,7 @@ namespace Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
-
+                            Clave = reader.GetString(6),
                         };
                     }
                     connection.Close();
@@ -178,7 +182,7 @@ namespace Inmobiliaria.Models
             Propietarios p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email FROM Propietarios" +
+                string sql = $"SELECT IdProp, Nombre, Apellido, Dni, Telefono, Email, Clave FROM Propietarios" +
                     $" WHERE Nombre LIKE %@nombre% OR Apellido LIKE %@nombre";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -196,6 +200,7 @@ namespace Inmobiliaria.Models
                             Dni = reader.GetString(3),
                             Telefono = reader.GetString(4),
                             Email = reader.GetString(5),
+                            Clave = reader.GetString(6),
                         };
                         res.Add(p);
                     }

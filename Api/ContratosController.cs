@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Inmobiliaria.Models;
@@ -23,17 +23,83 @@ namespace Inmobiliaria.Api
         {
             this.contexto = contexto;
         }
+
         // GET: api/<ContratosController>
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("inmueblesConContrato")]
+        public async Task<ActionResult> InmueblesConContrato()
         {
 
             try
             {
-                var usuarios = User.Identity.Name;
-                var res = contexto.Contratos.Include(x => x.Inquilinos).Include(x => x.Inmuebles).ThenInclude(x => x.Propietarios).Where(c => c.Inmuebles.Propietarios.Email == usuarios);
 
-                return Ok(res);
+                var usuario = User.Identity.Name;
+                var contratosVigentes = contexto.Contratos
+
+              .Include(x => x.Inquilinos)
+              .Include(x => x.Inmuebles)
+              .Where(c => c.Inmuebles.Propietarios.Email == usuario).ToList();
+                // .ThenInclude(x => x.Propietarios)
+
+
+                return Ok(contratosVigentes);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        // GET api/<controller>/5
+        [HttpGet("obtenerPorId/{id}")]
+        public async Task<IActionResult> ObtenerPorId(int id)
+        {
+            try
+            {
+                var usuario = User.Identity.Name;
+                var contratoPorId = contexto.Contratos
+                .Include(x => x.Inquilinos)
+                .Include(x => x.Inmuebles)
+                .Where(c => c.Inmuebles.Propietarios.Email == usuario)
+                .Single(e => e.IdInm == id);
+
+                return Ok(contratoPorId);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+
+        // GET: api/<Contratos>
+        [HttpGet("inmueble/{id}")]
+        public async Task<ActionResult<IEnumerable<Contratos>>> GetContratosPorInmuebles(int id)
+        {
+
+            try
+            {
+
+                var contratos = await contexto.Contratos
+                    .Include(cont => cont.Inmuebles)
+                    .Include(cont => cont.Inquilinos)
+                    .Include(cont => cont.Inmuebles.Propietarios)
+                    .Where(cont => cont.IdInm == id && cont.Inmuebles.Propietarios.Email == User.Identity.Name)
+                    .FirstOrDefaultAsync();
+
+
+                if (contratos.FechaCierre < DateTime.Now)
+                {
+                    contratos.Vigente = false;
+                }
+                else if (contratos == null || contratos.Inmuebles.Propietarios.Email != User.Identity.Name)
+                {
+
+                    return NotFound("No existen Contratos Vigentes");
+
+                }
+                return Ok(contratos);
             }
             catch (Exception ex)
             {
@@ -43,67 +109,36 @@ namespace Inmobiliaria.Api
 
         }
 
-        // GET api/<ContratosController>/5
+        // GET api/<ContratosController>/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<ActionResult<Contratos>> GetContratos(int id)
         {
-            try
-            {
-                var usuarios = User.Identity.Name;
-                var res = contexto.Contratos.Include(x => x.Inquilinos)
-                    .Include(x => x.Inmuebles)
-                    .ThenInclude(x => x.Propietarios)
-                    .Where(c => c.Inmuebles.Propietarios.Email == usuarios)
-                    .Single(e => e.IdContr == id);
+            var contratos = await contexto.Contratos.FindAsync(id);
 
-                return Ok(res);
-            }
-            catch (Exception ex)
+            if (contratos == null)
             {
-                return BadRequest(ex);
+                return NotFound();
             }
+            return contratos;
         }
 
         // POST api/<ContratosController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] Contratos contratos)
+        public async Task<ActionResult<Contratos>> Get(int id)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    contratos.IdInm = contexto.Inmuebles.FirstOrDefault(e => e.Propietarios.Email == User.Identity.Name).IdInm;
-                    contratos.IdInq = contexto.Inquilinos.Single(e => e.IdInq == contratos.IdInq).IdInq;
-                    contexto.Contratos.Add(contratos);
-                    contexto.SaveChanges();
-                    return CreatedAtAction(nameof(Get), new { id = contratos.IdContr }, contratos);
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
-        // GET api/<ContratosController>/3
-        [HttpGet("inmueble/{IdInmueble}")]
-        public async Task<ActionResult<Contratos>> GetObtenerTodosPorInm(int IdInm)
-        {
-            try
-            {
+            var contrato = await contexto.Contratos.FindAsync(id);
 
-                var list = await contexto.Contratos.Include(e => e.Inquilinos).Include(e => e.Inmuebles).Where(e => e.IdInm == IdInm).ToListAsync();
-                return Ok(list);
-            }
-            catch (Exception ex)
+            if (contrato == null)
             {
-                return BadRequest(ex);
+                return NotFound();
             }
+            return contrato;
         }
 
-        // PUT api/<ContratosController>/5
+
+        // PUT api/<ContratosController>/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromForm] Contratos contratos)
+        public async Task<IActionResult> Put(int id, Contratos contratos)
         {
             try
             {
@@ -125,7 +160,7 @@ namespace Inmobiliaria.Api
         }
 
 
-        // DELETE api/<ContratosController>/5
+        // DELETE api/<ContratoController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -140,6 +175,9 @@ namespace Inmobiliaria.Api
 
             return (IActionResult)contratos;
         }
+
+
+
 
         public async Task<IActionResult> GetPropietariosVigentes()
         {

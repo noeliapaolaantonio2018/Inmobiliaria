@@ -26,16 +26,21 @@ namespace Inmobiliaria.Api
         }
         // GET: api/<PagosController>
         [HttpGet]
-        public  async Task<IActionResult> Get()
+        public async Task<ActionResult<IEnumerable<Pagos>>> GetPagos()
         {
             try
             {
-                var usuarios = User.Identity.Name;
-                var res = contexto.Pagos.Include(e => e.Contratos)
-                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuarios)
-                                       .Select(x => new { x.NumPago, x.FechaPago, x.Importe });
+                var pago = await contexto.Pagos
+                .Include(pagos => pagos.Contratos)
+                .Include(pagos => pagos.Contratos.Inmuebles)
+                .Where(pagos => pagos.Contratos.Inmuebles.Propietarios.Email == User.Identity.Name && pagos.Contratos.FechaInicio <= DateTime.Now && pagos.Contratos.FechaCierre >= DateTime.Now)
+                .ToListAsync();
+                if (pago == null)
+                {
+                    return NotFound("No se registraron pagos");
+                }
 
-                return Ok(res);
+                return Ok(pago);
             }
             catch (Exception ex)
             {
@@ -49,9 +54,9 @@ namespace Inmobiliaria.Api
         {
             try
             {
-                var usuarios = User.Identity.Name;
+                var usuario = User.Identity.Name;
                 var res = contexto.Pagos.Include(e => e.Contratos)
-                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuarios && e.IdContr == id)
+                                       .Where(e => e.Contratos.Inmuebles.Propietarios.Email == usuario && e.IdContr == id)
                                        .Select(x => new { x.NumPago, x.FechaPago, x.Importe });
                 return Ok(res);
             }
@@ -61,7 +66,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // POST api/<PagosController>
+        // POST api/<PagoController>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] Pagos pagos)
         {
@@ -69,7 +74,7 @@ namespace Inmobiliaria.Api
             {
                 if (ModelState.IsValid)
                 {
-                    var usuarios = User.Identity.Name;
+                    var usuario = User.Identity.Name;
                     pagos.IdContr = contexto.Contratos.FirstOrDefault(e => e.Inmuebles.Propietarios.Email == User.Identity.Name).IdContr;
                     contexto.Pagos.Add(pagos);
                     contexto.SaveChanges();
@@ -84,7 +89,7 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // PUT api/<PagoController>/5
+        // PUT api/<PagoController>/4
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] Pagos pagos)
         {
@@ -106,20 +111,10 @@ namespace Inmobiliaria.Api
             }
         }
 
-        // DELETE api/<PagosController>/5
+        // DELETE api/<PagoController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public void Delete(int id)
         {
-            var pagos = await contexto.Pagos.FindAsync(id);
-            if (pagos == null)
-            {
-                return NotFound();
-            }
-
-            contexto.Pagos.Remove(pagos);
-            await contexto.SaveChangesAsync();
-
-            return (IActionResult)pagos;
         }
     }
 }
